@@ -1,0 +1,32 @@
+Al Page Intelligence Extension v2.0 - Clean Installation
+========================================================
+
+INSTALLATION STEPS:
+
+1. Open Chrome and go to: chrome://extensions/
+
+2. Enable "Developer mode" (toggle in top right)
+
+3. Click "Load unpacked"
+
+4. Navigate to this folder: 
+   /root/.openclaw/workspace/chrome-extensions/al-extension-clean/
+
+5. Click "Select Folder"
+
+6. Extension should appear as "Al Page Intelligence v2.0"
+
+7. Test by clicking the extension icon (⚡) and trying "Full Capture"
+
+FEATURES:
+- 🎯 Full Capture: Complete page intelligence extraction
+- 📸 Screenshot: Visual capture with metadata  
+- 🎬 Videos: Advanced video detection and analysis
+- 🔗 Links: Smart link categorization
+- 📝 Notes: Context-aware page notes
+
+BRIDGE SERVER: 
+Running on http://165.22.136.90:8092
+Status endpoint: http://165.22.136.90:8092/status
+
+If you have issues, remove any old "Al Extension" first, then install this clean version.

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al Extension</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 380px;
+      min-height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .header .subtitle {
+      opacity: 0.8;
+      font-size: 12px;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h3 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .capture-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .full-capture {
+      grid-column: 1 / -1;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: rgba(34, 197, 94, 0.8);
+      font-size: 15px;
+      padding: 16px;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: rgba(34, 197, 94, 0.9);
+    }
+
+    .btn-secondary {
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+
+    .quick-actions {
+      margin-top: 15px;
+    }
+
+    .textarea {
+      width: 100%;
+      height: 60px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 13px;
+      resize: none;
+      margin-bottom: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .textarea:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .settings {
+      position: relative;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .settings-content {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .settings.visible .settings-content {
+      display: block;
+    }
+
+    .settings-toggle {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+    }
+
+    .status {
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-top: 10px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .status.success {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .status.error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .status.info {
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    .connection-status {
+      font-size: 11px;
+      text-align: center;
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+
+    .last-capture {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 10px;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    .emoji {
+      font-size: 16px;
+    }
+
+    .feature-badge {
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.2);
+      color: #FFD700;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚡ Al Extension</h1>
+    <p class="subtitle">Comprehensive Page Intelligence</p>
+  </div>
+
+  <div class="content">
+    <!-- Full Capture - The main feature -->
+    <div class="section">
+      <div class="full-capture">
+        <button id="fullCaptureBtn" class="btn btn-primary">
+          <span class="emoji">🎯</span>
+          <span>FULL CAPTURE</span>
+          <span class="feature-badge">NEW</span>
+        </button>
+      </div>
+      <div class="last-capture" id="lastCapture">
+        Ready to extract everything from this page...
+      </div>
+    </div>
+
+    <!-- Quick Capture Options -->
+    <div class="section">
+      <h3>🚀 Quick Capture</h3>
+      <div class="capture-grid">
+        <button id="screenshotBtn" class="btn btn-secondary">
+          <span class="emoji">📸</span>
+          Screenshot
+        </button>
+        <button id="videoBtn" class="btn btn-secondary">
+          <span class="emoji">🎬</span>
+          Videos
+        </button>
+        <button id="pageBtn" class="btn btn-secondary">
+          <span class="emoji">📄</span>
+          Page Info
+        </button>
+        <button id="linksBtn" class="btn btn-secondary">
+          <span class="emoji">🔗</span>
+          Links
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Note -->
+    <div class="section quick-actions">
+      <h3>📝 Quick Note</h3>
+      <textarea 
+        id="quickMessage" 
+        class="textarea" 
+        placeholder="Add a note about this page..."
+      ></textarea>
+      <button id="sendBtn" class="btn">
+        <span class="emoji">📤</span>
+        Send Note to Al
+      </button>
+    </div>
+
+    <!-- Settings -->
+    <div class="settings" id="settings">
+      <button id="settingsToggle" class="settings-toggle">⚙️ Settings & Connection</button>
+      
+      <div class="settings-content">
+        <div class="checkbox-group">
+          <input type="checkbox" id="alEnabled" class="checkbox" checked>
+          <label for="alEnabled">Enable Al Integration</label>
+        </div>
+        
+        <button id="saveBtn" class="btn btn-secondary">Save Settings</button>
+        
+        <div id="connectionStatus" class="connection-status">
+          Checking connection...
+        </div>
+      </div>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="popup-v2.js"></script>
+</body>
+</html>
